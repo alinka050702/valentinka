@@ -111,13 +111,15 @@
             noScale -= 0.1; // "Нет" уменьшается
             yesScale += 0.2; // "Да" растет быстрее
 
+            // Ограничим минимальный размер "Нет", чтобы она не исчезла совсем
             if (noScale < 0.4) noScale = 0.4;
             
- ы
+            // Применяем новые размеры
             noBtn.style.transform = `scale(${noScale})`;
             yesBtn.style.transform = `scale(${yesScale})`;
         });
 
+        // Функция создания сердечка
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -127,10 +129,19 @@
             heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
             // Случайная скорость полета
             heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
             document.body.appendChild(heart);
+            
+            // Удаляем сердечко после окончания анимации
             setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Логика при нажатии "ДА"
         yesBtn.addEventListener('click', () => {
+            // Заменяем содержимое страницы на финальный текст
             mainContent.innerHTML = '<h1 style="font-size: 3.5rem;">¡Nos vemos pronto, amor mío! ❤️🥰</h1>';
+            
+            // Запускаем бесконечный поток сердечек
             setInterval(createHeart, 150);
         });
     </script>
