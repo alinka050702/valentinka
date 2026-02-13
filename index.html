@@ -1,71 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day!</title>
+    <title>Para Cristian ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #ff77a1, #ff5e98);
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Нежный розовый градиент */
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            font-family: 'Pacifico', cursive;
             overflow: hidden;
+            text-align: center;
         }
+
         h1 {
-            margin-top: 50px;
-            font-size: 48px;
+            color: #d63384;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            padding: 0 20px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
         }
-        .heart {
-            width: 50px;
-            height: 50px;
-            background: red;
-            display: inline-block;
-            position: relative;
-            animation: floating 3s infinite;
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px; /* Резервируем место */
         }
-        .heart::before, .heart::after {
-            content: '';
-            width: 50px;
-            height: 50px;
-            background: red;
-            border-radius: 50%;
-            position: absolute;
-        }
-        .heart::before {
-            top: -25px;
-            left: 0;
-        }
-        .heart::after {
-            left: 25px;
-            top: 0;
-        }
-        @keyframes floating {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
+
         button {
-            background: pink;
+            padding: 15px 35px;
+            font-size: 1.3rem;
             border: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 20px;
+            border-radius: 30px;
             cursor: pointer;
-            margin-top: 20px;
-            border-radius: 5px;
+            font-family: 'Pacifico', cursive;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            /* Плавный переход для изменения размера */
+            transition: all 0.3s ease;
         }
-        button:hover {
-            background: #ff5e98;
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 10;
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #ff4d6d;
+            position: relative; /* Сначала стоит обычно */
+        }
+
+        /* Анимация сердечек */
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            animation: floatUp 3s linear forwards;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <h1>Happy Valentine's Day, My Love!</h1>
-    <div class="heart"></div>
-    <div class="heart" style="animation-delay: 1s;"></div>
-    <div class="heart" style="animation-delay: 2s;"></div>
-    <p>Click the button to spread the love!</p>
-    <button onclick="alert('You have my heart! 💖')">Show Love</button>
+
+    <div class="content" id="mainContent">
+        <h1>Cristian, ¿quieres ser mi San Valentín? ❤️</h1>
+        
+        <div class="btn-container">
+            <button id="yesBtn">¡SÍ!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainContent = document.getElementById('mainContent');
+
+        // Начальные масштабы кнопок
+        let yesScale = 1.0;
+        let noScale = 1.0;
+
+        // Логика при попытке нажать "Нет"
+        noBtn.addEventListener('mouseover', () => {
+            // 1. Кнопка убегает
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            
+            // Переключаем на fixed, чтобы она могла летать по всему экрану
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
+
+            // 2. Изменение размеров
+            noScale -= 0.1; // "Нет" уменьшается
+            yesScale += 0.2; // "Да" растет быстрее
+
+            if (noScale < 0.4) noScale = 0.4;
+            
+ ы
+            noBtn.style.transform = `scale(${noScale})`;
+            yesBtn.style.transform = `scale(${yesScale})`;
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            // Случайная позиция по горизонтали и случайный размер
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            // Случайная скорость полета
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        yesBtn.addEventListener('click', () => {
+            mainContent.innerHTML = '<h1 style="font-size: 3.5rem;">¡Nos vemos pronto, amor mío! ❤️🥰</h1>';
+            setInterval(createHeart, 150);
+        });
+    </script>
 </body>
 </html>
