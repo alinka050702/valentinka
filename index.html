@@ -72,12 +72,12 @@
             100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
         }
 
-        .video-container {
+        .gif-container {
             margin-top: 30px;
             max-width: 90%;
         }
 
-        .video-container video {
+        .gif-container img {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
@@ -137,11 +137,8 @@
         yesBtn.addEventListener('click', () => {
             mainContent.innerHTML = `
                 <h1 style="font-size: 3.5rem;">¡Nos vemos pronto, amor mío! ❤️🥰</h1>
-                <div class="video-container">
-                    <video width="500" autoplay controls>
-                        <source src="grok-video-ec92764d-d8e0-4d45-9ab8-87d1c7f88731.gif
-" type="gif">
-                    </gif>
+                <div class="gif-container">
+                    <img src="grok-video-ec92764d-d8e0-4d45-9ab8-87d1c7f88731.gif" alt="Love GIF">
                 </div>
             `;
             
