@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff77a1, #ff5e98);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 48px;
+        }
+        .heart {
+            width: 50px;
+            height: 50px;
+            background: red;
+            display: inline-block;
+            position: relative;
+            animation: floating 3s infinite;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        button {
+            background: pink;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #ff5e98;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day, My Love!</h1>
+    <div class="heart"></div>
+    <div class="heart" style="animation-delay: 1s;"></div>
+    <div class="heart" style="animation-delay: 2s;"></div>
+    <p>Click the button to spread the love!</p>
+    <button onclick="alert('You have my heart! 💖')">Show Love</button>
+</body>
+</html>
